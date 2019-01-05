@@ -13,12 +13,13 @@ class Funcionario_model extends CI_Model {
 			$data['cpf'] = $this->input->post('cpf');
 			$data['email'] = $this->input->post('email');
 			$data['telefone'] = $this->input->post('telefone');
+			$data['senha'] = password_hash($this->input->post('senha'),PASSWORD_DEFAULT);
+			$data['cooperativa'] = $this->session->cooperativa;
 			$data['cep'] = $this->input->post('cep');
 			$data['uf'] = $this->input->post('uf');
 			$data['cidade'] = $this->input->post('cidade');
 			$data['endereco'] = $this->input->post('endereco');
-			$data['senha'] = password_hash($this->input->post('senha'),PASSWORD_DEFAULT);
-			$data['cooperativa'] = $this->input->post('cooperativa')? $this->input->post('cooperativa') : NULL;
+			$data['numero'] = $this->input->post('numero');
 
 			return $this->db->insert('funcionarios',$data);
 

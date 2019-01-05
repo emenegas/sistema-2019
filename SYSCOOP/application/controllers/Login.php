@@ -29,6 +29,7 @@ class Login extends CI_Controller {
                     'cpf' => $usuario->cpf,
                     'cooperativa' => $usuario->cooperativa,
                     'nome' => $usuario->nome,
+                    'id' => $usuario->id
                 );
                 $this->session->set_userdata($data);
 

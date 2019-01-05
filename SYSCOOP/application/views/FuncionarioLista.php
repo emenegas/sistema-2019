@@ -39,7 +39,7 @@ $this->load->view('Menu');
                            <td style="border: 1px solid #dee2e6;">  <?php echo $item->cpf ?></td>
                            <td style="border: 1px solid #dee2e6;">  <?php echo $item->cooperativa ?></td>
                            <td style="border: 1px solid #dee2e6;">
-                              <a href="<?php echo site_url('/funcionario/'.$item->id.'/editar') ?>" class="btn btn-outline-warning">Editar</a>  
+                              <a href=" <?php echo site_url('/funcionario/'.$item->id.'/editar') ?>" class="btn btn-outline-warning">Editar</a>  
                            </td> 
                         </tr>
 

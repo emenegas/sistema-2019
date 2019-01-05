@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$this->load->view('Menu');
+include'Menu.php';
 ?>
+
 <script language=javascript>
 
 	function fone(obj,prox) {
@@ -188,6 +189,15 @@ function retiraFormatacao(CPF)
 					</div>
 				</div>
 				<div class="col-md-4 mb-3">
+					<label form="senha">Senha</label>
+					<input type="password" name="senha" id="senha" class="form-control" placeholder="Digite a senha para acesso!" value="<?php echo set_value('senha')?>" required>
+					<div class="invalid-feedback">
+						Campo obrigatório! Digite a senha para posteriormente o funcionário poder acessar o sistema!
+					</div>
+				</div>
+            </div>
+			<div class="row border border-primary">
+				<div class="col-md-4 mb-3">
 					<label form="cep">CEP</label>
 					<input type="text" name="cep" id="cep" class="form-control" placeholder="00000-000" value="<?php echo set_value('cep')?>" required>
 					<div class="invalid-feedback">
@@ -196,7 +206,7 @@ function retiraFormatacao(CPF)
 				</div>
 
 				<div class="col-md-4 mb-3">
-					<label form="uf">UF</label>
+					<label form="uf">Estado</label>
 					<input type="text" name="uf" id="uf" class="form-control" value="<?php echo set_value('uf')?>" required>
 					<div class="invalid-feedback">
 						Campo obrigatório!
@@ -209,43 +219,40 @@ function retiraFormatacao(CPF)
 						Campo obrigatório!
 					</div>
 				</div>
-
+				
 				<div class="col-md-4 mb-3">
-					<label form="endereco">Endereço</label>
-					<input type="text" name="endereco" id="endereco" class="form-control" placeholder="Rua exemplo - 500, Bairro" value="<?php echo set_value('endereco')?>" required>
+					<label form="bairro">Bairro</label>
+					<input type="text" name="bairro" id="bairro" class="form-control" value="<?php echo set_value('bairro')?>" required>
 					<div class="invalid-feedback">
 						Campo obrigatório!
 					</div>
 				</div>
+
 				<div class="col-md-4 mb-3">
-					<label form="senha">Senha</label>
-					<input type="password" name="senha" id="senha" class="form-control" placeholder="Digite a senha para acesso!" value="<?php echo set_value('senha')?>" required>
+					<label form="endereco">Endereço</label>
+					<input type="text" name="endereco" id="endereco" class="form-control" placeholder="Rua exemplo" value="<?php echo set_value('endereco')?>" required>
 					<div class="invalid-feedback">
-						Campo obrigatório! Digite a senha para posteriormente o funcionário poder acessar o sistema!
+						Campo obrigatório!
 					</div>
 				</div>
-
-				<div class="col-md-8 mb-3">
-					<label for="cooperativa">Cooperativa:</label>
-					<select name="cooperativa" class="form-control" required>
-
-						<?php foreach ($cooperativas as $cooperativa)
-						{
-							echo'<option value="' . $cooperativa->id . '">' . $cooperativa->nomeFantasia . '</option>';
-						}?>
-					</select>
+               <div class="col-md-4 mb-3">
+					<label form="numero">Numero</label>
+					<input type="text" name="numero" id="numero" class="form-control" placeholder="Ex. 0000" value="<?php echo set_value('numero')?>" required>
 					<div class="invalid-feedback">
-						Campo obrigatório! Selecione a Cooperativa que o Funcionário pertencerá! 
+						Campo obrigatório!
 					</div>
 				</div>
+                </div>
+				
 
+			</div>
+			
 				<div class="button" style="margin-top: 30px;float: right;">
 					<button type="submit" class="btn btn-outline-info">Cadastrar</button>
 					<a href="<?php echo site_url('funcionario') ?>" class="btn btn-outline-danger">Cancelar</a>
 
 				</div>
 
-			</div>
 		</form>
 	</div>	
 	
@@ -280,6 +287,28 @@ function retiraFormatacao(CPF)
     });
 }, false);
 })();
+</script>
+<!--        endereço-->
+<script type="text/javascript">
+jQuery(function($){
+   $("#cep").change(function(){
+      var cep_code = $(this).val();
+      if( cep_code.length <= 0 ) return;
+      $.get("http://apps.widenet.com.br/busca-cep/api/cep.json", { code: cep_code },
+         function(result){
+            if( result.status!=1 ){
+               alert(result.message || "Houve um erro desconhecido");
+               return;
+            }
+            $("input#cep").val( result.code );
+            $("input#uf").val( result.state );
+            $("input#cidade").val( result.city );
+            $("input#bairro").val( result.district );
+            $("input#endereco").val( result.address );
+            
+         });
+   });
+});
 </script>
 
 <script type="text/javascript">

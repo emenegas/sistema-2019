@@ -11,40 +11,8 @@ class Funcionario extends MY_Controller {
 		$this->load->model('Funcionario_model');
 	}
 
-//----------------------------------------------------------------------------------
-
-	public function backup(){
-
-		$this->load->helper('url');
-		$this->load->helper('file');
-		$this->load->library('zip');
-		$this->load->dbutil();
-
-		$db_format = array(
-		        'format'        => 'txt',                       // gzip, zip, txt
-		        'add_drop'      => TRUE,                        // Whether to add DROP TABLE statements to backup file
-		        'add_insert'    => TRUE,                        // Whether to add INSERT data to backup file
-		    );
-		$backup = $this->dbutil->backup($db_format);
-		$dbname ='backup-'.date('Y-m-d H.i.s').'.sql';
-		$save='application/backups/'.$dbname;
-		write_file($save,$backup);
-		
-		redirect('projetopnae');
-		
-	}
-//----------------------------------------------------------------------------------
-	
-
-	public function ajuda(){
-		$dados=[
-
-		];
-		$this->load->view('Ajuda', $dados);
-	}
-	//----------------------------------------------------------------------------------
-
-
+//---------------------------------------------------------------------------------
+    
 	public function index(){
 		$dados=[
 			'funcionarios'=> $this->Funcionario_model->listar()
@@ -186,11 +154,11 @@ class Funcionario extends MY_Controller {
 		$this->form_validation->set_rules('email','Email',				'trim|required|valid_email');
 		$this->form_validation->set_rules('telefone','Telefone',		'trim|required');
 		$this->form_validation->set_rules('senha','Senha',				'trim|required');
-		$this->form_validation->set_rules('cooperativa','Cooperativa',	'trim');
-		$this->form_validation->set_rules('endereco','Endereço',		'trim|required');
 		$this->form_validation->set_rules('cep','CEP',					'trim|required');
-		$this->form_validation->set_rules('uf','Uf',					'trim|required');
+		$this->form_validation->set_rules('uf','Estado',				'trim|required');
 		$this->form_validation->set_rules('cidade','Cidade',			'trim|required');
+		$this->form_validation->set_rules('endereco','Endereço',		'trim|required');
+        $this->form_validation->set_rules('numero','Numero',	       	'trim|required');
 
 
 		if($this->form_validation->run()== FALSE):
