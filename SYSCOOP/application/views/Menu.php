@@ -65,7 +65,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
        <a class="text-white nav-link" href="<?php echo site_url('contato')?>">Contato</a>       
      </li>
      <li class="nav-item">
-       <a class="text-white nav-link" href="<?php echo site_url('funcionario/backup')?>" onclick="return confirm('Fazer Backup? Você sera redirecionando para Projetos...')">Backup</a>       
+       <a class="text-white nav-link" href="#" ></a>    
+          
      </li>
      <li class="nav-item navbar-right">
        <a class="btn btn-danger navbar-btn" href="<?php echo site_url('login/sair')?>">Sair</a>       

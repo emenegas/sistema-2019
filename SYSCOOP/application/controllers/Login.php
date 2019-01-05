@@ -26,7 +26,9 @@ class Login extends CI_Controller {
                 $this->load->view('Login_view', $data);
             }else{
                 $data = array(
-                    'cpf' => $this->input->post('cpf'),
+                    'cpf' => $usuario->cpf,
+                    'cooperativa' => $usuario->cooperativa,
+                    'nome' => $usuario->nome,
                 );
                 $this->session->set_userdata($data);
 
