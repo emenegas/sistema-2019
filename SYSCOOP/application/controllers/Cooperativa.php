@@ -192,7 +192,7 @@ class Cooperativa extends MY_Controller {
 		
 		$this->form_validation->set_rules('cnpj',         'CNPJ',         		 'trim|required|is_unique[cooperativas.cnpj]');
 		$this->form_validation->set_rules('nomeFantasia', 'Nome Fantasia', 		'trim|required');
-		$this->form_validation->set_rules('responsavel',  'Responsável Legal',   'trim|required');
+		$this->form_validation->set_rules('responsavel',  'Responsável Legal',   'trim');
 		$this->form_validation->set_rules('email',        'Email',        		 'trim|required|valid_email');
 		$this->form_validation->set_rules('telefone',     'Telefone',      		'trim|required');
 		$this->form_validation->set_rules('cooperativa',  'Cooperativa',   		'trim');

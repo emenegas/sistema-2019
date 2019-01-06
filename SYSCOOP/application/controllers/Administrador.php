@@ -11,10 +11,15 @@ class Administrador extends MY_Controller {
 	//----------------------------------------------------------------------------------
     public function index()
     {
-        
-        $name = $this->session->name;
-        
-        $this->load->view('Administrador', $name);
+    
+        if($this->session->cooperativa == NULL){
+            $this->load->view('Administrador');
+        }else{
+            
+            $data['formerror'] = 'Voce não tem permissão para acessar este diretório!';
+			
+			show_404();
+        }
         
     }
 

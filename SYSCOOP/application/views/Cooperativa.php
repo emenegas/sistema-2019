@@ -25,14 +25,14 @@ $this->load->view('Menu');
 				</div>
 				<div class="col-md-4 mb-3">
 					<label for="responsavel">Responável Legal:</label>
-					<input list="responsavel" name="responsavel" class="form-control" required>
+					<input list="responsavel" name="responsavel" class="form-control" >
 					<datalist id="responsavel" >
 						<?php foreach ($funcionarios as $funcionario): ?>	
 							<option value="<?php echo $funcionario->id ?>"><?php echo $funcionario->nome ?></option>
 						<?php endforeach ?>
 					</datalist>
 					<div class="invalid-feedback">
-						Campo obrigatório! Selecione o funcionário que é o Representante/Presidente da Cooperativa.
+						Campo obrigatório! Não se esqueça de selecionar o responsável posteriormente!
 					</div>
 				</div>
 				<div class="col-md-4 mb-3">
@@ -51,7 +51,7 @@ $this->load->view('Menu');
 				</div>
 				<div class="col-md-4 mb-3">
 					<label for="cooperativa">Cooperativa</label>
-					<input list="cooperativa" name="cooperativa" class="form-control" required>
+					<input list="cooperativa" name="cooperativa" class="form-control">
 					<datalist id="cooperativa" >
 						<?php foreach ($cooperativas as $item): ?>
 							<option value="<?php echo $item->id ?>"><?php echo $item->nomeFantasia ?></option>

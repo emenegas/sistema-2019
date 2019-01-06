@@ -42,10 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <li class="nav-item">
         <a class="text-white nav-link" href="<?php echo site_url('funcionario')?>">Funcionários</a>
       </li>
-    </ul>
-    <ul class="nav justify-content-end">
-
-      <li class="nav-item dropdown">
+          <li class="nav-item dropdown">
 
         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Relatórios
@@ -64,12 +61,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <li class="nav-item">
        <a class="text-white nav-link" href="<?php echo site_url('contato')?>">Contato</a>       
      </li>
+    </ul>
+    <ul class="nav justify-content-end">
+
+  
      <li class="nav-item">
        <a class="text-white nav-link" ><?php echo $this->session->nome; ?></a>    
           
      </li>
      <li class="nav-item navbar-right">
-       <a class="btn btn-danger navbar-btn" href="<?php echo site_url('login/sair')?>">Sair</a>       
+           <a class="btn btn-danger navbar-btn" href="<?php echo site_url('login/sair')?>">Sair</a>       
      </li>
    </ul>
  </div>

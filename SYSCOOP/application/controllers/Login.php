@@ -32,8 +32,23 @@ class Login extends CI_Controller {
                     'id' => $usuario->id
                 );
                 $this->session->set_userdata($data);
-
-                redirect('projetopnae');
+                
+                if(($this->session->cooperativa == NULL) || ($this->session->cooperativa == '03024875069'))
+                {
+                    redirect('administrador');
+                
+                }else{
+                    $this->load->model('Cooperativa_model');
+                    
+                    $cooperativaCentral = $this->Cooperativa_model->getById($this->session->cooperativa);
+                    
+                    if($cooperativaCentral->cooperativa == NULL)
+                    {
+                        redirect('funcionario');
+                    }else{
+                        redirect('projetopnae');
+                    }    
+                }
             }
         }
     }

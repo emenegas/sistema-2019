@@ -237,7 +237,7 @@ function retiraFormatacao(CPF)
 				</div>
                <div class="col-md-4 mb-3">
 					<label form="numero">Numero</label>
-					<input type="text" name="numero" id="numero" class="form-control" placeholder="Ex. 0000" value="<?php echo set_value('numero')?>" required>
+					<input type="text" name="numero" id="numero" class="form-control" placeholder="Ex. 0000" value="<?php echo set_value('numero')?>" >
 					<div class="invalid-feedback">
 						Campo obrigatório!
 					</div>
