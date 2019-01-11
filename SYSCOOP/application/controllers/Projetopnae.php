@@ -49,12 +49,26 @@ class Projetopnae extends MY_Controller {
 
 
 	public function novo(){
-		$dados=[
+         if(($this->session->cooperativa == NULL) || ($this->session->cpf == '03024875069'))
+                {
+                    $dados=[
 
-			'cooperativas'=> $this->Cooperativa_model->listar(),
-			'entidadesExecutoras' => $this->Entidade_model->listar()
+			         'cooperativas'=> $this->Cooperativa_model->listar(),
+                    'entidadesExecutoras' => $this->Entidade_model->listar()
 
-		];
+		              ];
+                
+                }else{
+
+                    $dados=[
+
+			         'cooperativas'=> $this->Cooperativa_model->getByIdDataList($this->session->cooperativa),
+                     'entidadesExecutoras' => $this->Entidade_model->listar()
+
+		              ];
+                   
+                }
+		
 		$this->load->view('Projetopnae', $dados);
 
 	}
@@ -185,9 +199,8 @@ class Projetopnae extends MY_Controller {
 			$dados['cooperativas'] = $this->Cooperativa_model->listar();
 			$dados['entidadesExecutoras'] = $this->Entidade_model->listar();
 		}else{
-
-
-			$pathToSave = $_SERVER["DOCUMENT_ROOT"] . "/application/arquivoEdital/";
+            
+			$pathToSave = $_SERVER["DOCUMENT_ROOT"] . "/sistema-2019/SYSCOOP/application/arquivoEdital/";
 
 			/*Checa se a pasta existe - caso negativo ele cria*/
 			if(!file_exists($pathToSave))
@@ -203,33 +216,37 @@ class Projetopnae extends MY_Controller {
 					$dir = $pathToSave; 
 					$tmpName = $_FILES['arquivoEdital']['tmp_name'];
 					$name = $_FILES['arquivoEdital']['name'];
-					$pdf_path = "/application/arquivoEdital/".$_FILES['arquivoEdital']['name'];
+					$pdf_path = "/sistema-2019/SYSCOOP/application/arquivoEdital/".$_FILES['arquivoEdital']['name'];
 
 					preg_match_all('/\.[a-zA-Z0-9]+/', $name , $extensao);
 					if(!in_array(strtolower(current(end($extensao))), array('.txt','.pdf', '.doc', '.xls','.xlms')))
 					{
-						$dados['formerror'] = 'Permitido apenas arquivos doc,xls,pdf e txt.';
+						$dados['formerror'] = 'Permitido apenas arquivos doc,pdf e txt.';
 					}else{
-						$name = $_FILES['arquivoEdital']['name'].date('Y-m-d H.i.s').'.pdf';
+						$name = $_FILES['arquivoEdital']['name'];
 						move_uploaded_file( $tmpName, $dir . $name );   
 					}          
 
 				}
 
 			}
+            
 			$cooperativa = $this->Cooperativa_model->getById(set_value('cooperativa'));
 
 			if(!$cooperativa){
 				$dados['formerror'] .= '<p>Esta cooperativa nÃ£o existe</p>';
-
 			}
+            if(!$cooperativa->responsavel){
+                $dados['formerror'] .= '<p>Esta cooperativa não possui um responsável</p>';
+                
+            }
 			$entidadeExecutora = $this->Entidade_model->getById(set_value('entidadeExecutora'));
 			if(!$entidadeExecutora){
 				$dados['formerror'] .= '<p>Esta entidadeExecutora nÃ£o existe</p>';
 			}
 
 			if(empty($dados['formerror']) ){
-				$id = $this->Projetopnae_model->cadastrar($cooperativa, $entidadeExecutora,$pdf_path);
+				$id = $this->Projetopnae_model->cadastrar($cooperativa, $entidadeExecutora, $name);
 				if($id){
 					redirect('projetopnae/'.$id.'/itens');
 				}

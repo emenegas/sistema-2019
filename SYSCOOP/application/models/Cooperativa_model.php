@@ -65,7 +65,23 @@ class Cooperativa_model extends CI_Model {
 			return FALSE;
 		}
 	}
+//----------------------------------------------------------------------------------
+	
+	public function getByIdDataList($id){
 
+		try{
+
+			$cooperativa = $this->db
+			->where('id', $id)
+			->get('cooperativas')
+			->result();
+
+			return($cooperativa);
+
+		}catch(Exception $e){
+			return FALSE;
+		}
+	}
 	//-----------------ALTERAR-----------------------------------------------------------------
 
 	public function alterar($id,$data) {

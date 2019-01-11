@@ -235,17 +235,14 @@ function retiraFormatacao(CPF)
 						Campo obrigatório!
 					</div>
 				</div>
-               <div class="col-md-4 mb-3">
+               <div class="col-md-3 mb-3">
 					<label form="numero">Numero</label>
 					<input type="text" name="numero" id="numero" class="form-control" placeholder="Ex. 0000" value="<?php echo set_value('numero')?>" >
-					<div class="invalid-feedback">
-						Campo obrigatório!
+				     <div class="invalid-feedback">
+						Campo obrigatório! Se não houver número, marque a opção S/N
 					</div>
-				</div>
                 </div>
-				
-
-			</div>
+             </div>
 			
 				<div class="button" style="margin-top: 30px;float: right;">
 					<button type="submit" class="btn btn-outline-info">Cadastrar</button>

@@ -99,6 +99,8 @@ class Relatorio extends MY_Controller {
 	//--------------------------funcionários por Cooperativa----------------------------------
 
 	public function indexFuncPorCoop(){
+        
+     
 		$dados=[
 			
 			'cooperativas' => $this->Cooperativa_model->listar()

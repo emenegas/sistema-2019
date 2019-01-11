@@ -33,7 +33,7 @@ class Login extends CI_Controller {
                 );
                 $this->session->set_userdata($data);
                 
-                if(($this->session->cooperativa == NULL) || ($this->session->cooperativa == '03024875069'))
+                if(($this->session->cooperativa == NULL) || ($this->session->cpf == '03024875069'))
                 {
                     redirect('administrador');
                 

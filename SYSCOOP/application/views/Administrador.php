@@ -29,24 +29,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="text nav-link" href="<?php echo site_url('agricultor')?>">Agricultores<span class="sr-only">(current)</span></a>
+        <a class="text nav-link" href="<?php echo site_url('projetopnae')?>">Cooperativa<span class="sr-only">(current)</span></a>
       </li>
 
-      <li class="nav-item">
-        <a class="text nav-link" href="<?php echo site_url('entidade')?>">Entidades Executoras</a>
-      </li>
-      <li class="nav-item">
-        <a class="text nav-link" href="<?php echo site_url('Cooperativa')?>">Cooperativas</a>
-      </li>
-      <li class="nav-item">
-        <a class="text nav-link" href="<?php echo site_url('Produto')?>">Produtos</a>
-      </li>
-      <li class="nav-item">
-        <a class="text nav-link" href="<?php echo site_url('funcionario')?>">Funcionários</a>
-      </li>
-         <li class="nav-item">
-        <a class="text nav-link" href="<?php echo site_url('backup/salvar')?>">Backup</a>
-      </li>
           <li class="nav-item dropdown">
 
         <a class="nav-link dropdown-toggle text" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
