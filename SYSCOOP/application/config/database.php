@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
+	'hostname' => 'mysql.syscoops.com',
+	'username' => 'syscoop',
+	'password' => 'senha foda do banco',
 	'database' => 'syscoop',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

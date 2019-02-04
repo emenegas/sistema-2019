@@ -6,7 +6,7 @@ include'Menu.php';
 <body>
 
 
-	<div class="container-fluid">
+<div class="container-fluid">
 		<form class="needs-validation" action="<?php echo site_url('agricultor/cadastrar')?>" method="post"  novalidate>
 			<div class="form-row">
 				<div class="col-md-4 mb-3">
@@ -88,13 +88,16 @@ include'Menu.php';
 				</div>
 
 				<div class="form-check form-check-inline">
-					<label for="produtos">Produtos:</label>
+					<label for="produtos">Produtos:  </label>
 					<?php foreach ($produtos as $produto)
 					{
 						echo '<input type="checkbox" class="form-check-input" name="produtos[]" value="' .$produto->id.'">' .$produto->nome;
 					}?>
 
 				</div>
+				<div>
+				 
+                </div>
 			</div>
 			<div class="button" style="margin-top: 30px;float: right;">
 				<button type="submit" data-toggle="tooltip" title="Clique para finalizar o Cadastro!" class="btn btn-outline-success">Cadastrar</button>
@@ -105,6 +108,8 @@ include'Menu.php';
 		</form>
 
 	</div>
+	
+
 		<?php if(isset($formerror)): ?>
 		<div class="alert alert-danger alert-dismissible fade show" role="alert">
 			<strong>Aviso!</strong>
@@ -112,8 +117,8 @@ include'Menu.php';
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">&times;</span> 
 			</button>
-		</div>
-	<?php endif; ?>
+	    	</div>
+    	<?php endif; ?>
 
 </body>
 <script>
@@ -147,9 +152,11 @@ input.addEventListener('change', function() {
 	}
 });
 </script>
+<!--
 
 <script type="text/javascript">
 	setTimeout(function(){
 		$('button.close').click()
 	},5000);
 </script>
+-->
