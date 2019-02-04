@@ -6,6 +6,15 @@ class Backup extends MY_Controller {
 	function __construct(){
 		parent:: __construct();
     }
+    
+    //----------------------------------------------------------------------------------
+
+    public function index(){
+        $this->load->view('Backup.php');  
+    }
+    
+    //----------------------------------------------------------------------------------
+
 	public function salvar(){
 
 		$this->load->helper('url');
@@ -26,5 +35,10 @@ class Backup extends MY_Controller {
 		redirect('projetopnae');
 		
 	}
-//----------------------------------------------------------------------------------
+    
+    //----------------------------------------------------------------------------------
+    
+    public function restaurar(){
+        
     }
+ }

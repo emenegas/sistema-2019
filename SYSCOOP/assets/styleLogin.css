@@ -10,7 +10,7 @@ input:focus{
 
 }
 html,body{
-  background-image: url('assets/campo.jpg');
+  background-image: url(assets/campo.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;

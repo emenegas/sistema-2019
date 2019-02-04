@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$this->load->view('Menu');
+include'Menu.php'; 
 ?>
 
 <body>
@@ -39,6 +39,7 @@ $this->load->view('Menu');
 				</td>
 				<td>
 					<select name="produto" class="form-control" id="produto" data-toggle="tooltip" title="Clique para exibir os produtos" autocomplete="off">
+					<option></option>
 						<?php foreach ($produtos as $produto): ?>
 							<option value="<?php echo $produto->id ?>"><?php echo $produto->nome ?></option>
 						<?php endforeach ?>

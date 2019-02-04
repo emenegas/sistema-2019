@@ -12,7 +12,6 @@ class Itens extends MY_Controller {
 		$this->load->model('Produto_model');
 		$this->load->model('Agricultor_model');
 		
-
 	}
 
 	//----------------------------------------------------------------------------------
@@ -52,8 +51,8 @@ class Itens extends MY_Controller {
 		];
 
 		$this->load->library(array('form_validation'));
-		$this->form_validation->set_rules('produto',     'Cod Produto',          			 'trim|required|is_natural');
-		$this->form_validation->set_rules('agricultor',     'Cod Agricultor',     			 'trim|is_natural');
+		$this->form_validation->set_rules('produto',     'Produto',          			 'trim|required|is_natural');
+		$this->form_validation->set_rules('agricultor',     'Agricultor',     			 'trim|is_natural');
 		$this->form_validation->set_rules('quantidade',     'Quantidade',      				 'trim|required|is_natural');
 		$this->form_validation->set_rules('precoUnidade',     'Preço Unitário',     		 'trim|required');
 		$this->form_validation->set_rules('descricaoProd',     'Descrição',     			 'trim|required');
@@ -67,10 +66,7 @@ class Itens extends MY_Controller {
 			$this->load->view('Itens', $dados);
 
 		}else{
-			// $agricultor = $this->Agricultor_model->getByProjeto($idProjeto)
-			// if($agricultor->dapLimite){
-				
-			// }
+			
 			$this->Itens_model->Cadastrar($idProjeto);
 
 			redirect('/projetopnae/'.$idProjeto. '/itens');

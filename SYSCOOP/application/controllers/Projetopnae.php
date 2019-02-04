@@ -234,7 +234,7 @@ class Projetopnae extends MY_Controller {
 			$cooperativa = $this->Cooperativa_model->getById(set_value('cooperativa'));
 
 			if(!$cooperativa){
-				$dados['formerror'] .= '<p>Esta cooperativa nÃ£o existe</p>';
+				$dados['formerror'] .= '<p>Esta cooperativa não existe</p>';
 			}
             if(!$cooperativa->responsavel){
                 $dados['formerror'] .= '<p>Esta cooperativa não possui um responsável</p>';
@@ -242,7 +242,7 @@ class Projetopnae extends MY_Controller {
             }
 			$entidadeExecutora = $this->Entidade_model->getById(set_value('entidadeExecutora'));
 			if(!$entidadeExecutora){
-				$dados['formerror'] .= '<p>Esta entidadeExecutora nÃ£o existe</p>';
+				$dados['formerror'] .= '<p>Esta Entidade Executora não existe</p>';
 			}
 
 			if(empty($dados['formerror']) ){
@@ -250,10 +250,11 @@ class Projetopnae extends MY_Controller {
 				if($id){
 					redirect('projetopnae/'.$id.'/itens');
 				}
-				$dados['formerror'] .= '<p>NÃ£o foi possivel cadastrar este projeto!</p>';
+				$dados['formerror'] .= '<p>Não foi possivel cadastrar este projeto!</p>';
 			}
 		}
-
+        $dados['cooperativas'] = $this->Cooperativa_model->listar();
+        $dados['entidadesExecutoras'] = $this->Entidade_model->listar();
 		$this->load->view('Projetopnae', $dados);
 	}
 }
