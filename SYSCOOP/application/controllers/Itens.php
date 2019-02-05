@@ -20,7 +20,13 @@ class Itens extends MY_Controller {
 
 		$id = $idProjeto;
 		$projeto = $this->Projetopnae_model->getById($id);
-
+        if($projeto->status == "inativo"){
+            $dados=[
+			'projetos'=> $this->Projetopnae_model->listar()
+		];
+            $dados['formerror'] = 'Um projeto concluido não poder ter os itens alterados!';
+            exit($this->load->view('ProjetosLista.php', $dados, TRUE));
+        }
 		if(!$projeto)
 			show_404();
 
