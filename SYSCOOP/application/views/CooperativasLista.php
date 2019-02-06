@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$this->load->view('Menu');
+include'Menu.php';
 ?>
   <?php if(isset($formerror)): ?>
    <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -16,12 +16,12 @@ $this->load->view('Menu');
       <table class= 'table table-hover'>
          <thead>
             <tr id="title"><th colspan=3 style="border: none;">Cooperativas <a style="width: 100px;" href="<?php echo site_url('cooperativa/novo') ?>" class="btn btn-outline-info">NOVA</a> 
-               <a style="width: 100px;" href="<?php echo site_url('cooperativa?status=inativo') ?>" t" class="btn btn-outline-danger">Inativas</a> 
+               <a style="width: 100px;" href="<?php echo site_url('cooperativa?status=inativo') ?>" class="btn btn-outline-danger">Inativas</a> 
             </th></tr>
          </thead>
 
          <tbody>
-            <!--Create rows here -->
+            
             <tr style="width: 80px;">
                <th style="border: 1px solid #dee2e6 ;">Código</th>
                <th style="border: 1px solid #dee2e6 ;">Nome Fantasia</th>

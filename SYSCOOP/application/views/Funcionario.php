@@ -116,11 +116,14 @@ include'Menu.php';
 		$('button.close').click()
 	},2000);
 </script>
-</body>
 
 <script src="assets/cpf.js" type="text/javascript"></script>
 <script src="assets/endereco.js" type="text/javascript"></script>
 <script src="assets/hasValidate.js" type="text/javascript"></script>
+
+</body>
+
+
 
 
 

@@ -25,7 +25,6 @@ include'Menu.php';
   </thead>
 
   <tbody>
-   <!--Create rows here -->
    <tr style="width: 80px;">
     <th style="border: 1px solid #dee2e6 ;">Código</th>
     <th style="border: 1px solid #dee2e6 ;">Nome</th>

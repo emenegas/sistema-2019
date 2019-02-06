@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$this->load->view('Menu');
+include'Menu.php';
 ?>
 
   <?php if(isset($formerror)): ?>
@@ -19,7 +19,7 @@ $this->load->view('Menu');
          <thead>
             <tr id="title"><th style="border: none;" colspan=3>Funcionários <a href="<?php echo site_url('funcionario/novo') ?>" class="btn btn-outline-info">Novo</a> 
 
-               <a href="<?php echo site_url('funcionario?status=inativo') ?>" t" class="btn btn-outline-danger">Inativos</a> 
+               <a href="<?php echo site_url('funcionario?status=inativo') ?>" class="btn btn-outline-danger">Inativos</a> 
 
             </th></tr>
          </thead>

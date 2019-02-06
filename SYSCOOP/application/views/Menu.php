@@ -16,9 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="shortcut icon" href="assets/icone.png" >
 
   <link rel="stylesheet" type="text/css" href="assets/style.css">
-</head>
-
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
   <div class="container-fluid">
   <a class="text-white navbar-brand" href="<?php echo site_url('projetopnae')?>">Projetos</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,6 +75,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 </nav>
+
+</head>
+
 
 
 
