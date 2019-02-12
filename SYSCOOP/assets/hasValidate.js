@@ -16,3 +16,16 @@
     });
 }, false);
 })();
+function exibeErro(mensagem){
+formerror = 
+	'<div class="alert alert-danger alert-dismissible fade show" role="alert">'+
+	'<strong>Aviso!</strong>'+
+	'<div>'+mensagem+'</div>'+
+	'<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+		'<span aria-hidden="true">&times;</span>'+ 
+	'</button>'+
+'</div>';
+
+$(formerror).appendTo('body');
+
+}

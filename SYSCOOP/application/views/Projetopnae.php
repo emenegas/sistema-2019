@@ -24,20 +24,20 @@ include'Menu.php';
                     <input type="file" class="form-control-file" id="arquivoEdital" name="arquivoEdital" required>
                 </div>
 
+                <?php if(count($cooperativas) > 1): ?>
                 <div class="col-md-6 mb-3">
                     <label for="cooperativa">Cooperativa:</label>
                     <input list="cooperativa" name="cooperativa" class="form-control" data-toggle="tooltip" title="Selecione a Cooperativa Fornecedora para este Projeto!" required>
                     <datalist id="cooperativa">
+                    
                         <?php foreach ($cooperativas as $cooperativa): ?>
                         <option value="<?php echo $cooperativa->id ?>">
                             <?php echo $cooperativa->nomeFantasia ?>
                         </option>
                         <?php endforeach ?>
                     </datalist>
-
-
                 </div>
-
+                <?php endif ?>
                 <div class="col-md-6 mb-4">
                     <label for="entidadeExecutora">Entidade Executora:</label>
                     <input list="entidadeExecutora" name="entidadeExecutora" class="form-control" data-toggle="tooltip" title="Selecione a Entidade Executora do Projeto!" required>

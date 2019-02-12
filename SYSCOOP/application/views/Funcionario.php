@@ -17,7 +17,7 @@ include'Menu.php';
 				</div>
 				<div class="col-md-4 mb-3">
 					<label form="cpf">CPF</label>
-					<input type="text" class="form-control" name="cpf" id="cpf" placeholder="000.000.000-00" onKeyPress="return Apenas_Numeros(event);" onBlur="validaCPF(this);" maxlength="11">
+					<input type="tel" class="form-control" name="cpf" id="cpf" placeholder="000.000.000-00" maxlength="11">
 					<div class="invalid-feedback">
 						Campo obrigatório! Digite um CPF válido! Obs: Não é permitida a duplicidade desta informação!
 					</div>

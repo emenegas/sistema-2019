@@ -54,7 +54,7 @@ class Projetopnae extends MY_Controller {
                     $dados=[
 
 			         'cooperativas'=> $this->Cooperativa_model->listar(),
-                    'entidadesExecutoras' => $this->Entidade_model->listar()
+                   	 'entidadesExecutoras' => $this->Entidade_model->listar()
 
 		              ];
                 
@@ -187,7 +187,32 @@ class Projetopnae extends MY_Controller {
 
 		$this->form_validation->set_rules('nomeEdital', 		'Nome Edital',         'trim|required');
 		$this->form_validation->set_rules('arquivoEdital', 		'Arquivo Edital',         'trim');
-		$this->form_validation->set_rules('cooperativa',    	 'Cooperativa',           'trim|required|is_natural');
+
+		$cooperativaCentral = $this->Cooperativa_model->getById($this->session->cooperativa);
+    	 if($cooperativaCentral->cooperativa == 'bunda'){
+			$this->form_validation->set_rules('cooperativa',    	 'Cooperativa',           'trim|required|is_natural');
+			$cooperativa = $this->Cooperativa_model->getById(set_value('cooperativa'));
+
+			if(!$cooperativa){
+				$dados['formerror'] .= '<p>Esta cooperativa não existe</p>';
+			}
+            if(!$cooperativa->responsavel){
+                $dados['formerror'] .= '<p>Esta cooperativa não possui um responsável</p>';
+                
+            }
+		 }
+		 else{
+			
+			$cooperativa = $this->Cooperativa_model->getById($this->session->cooperativa);
+
+			if(!$cooperativa){
+				$dados['formerror'] .= '<p>Esta cooperativa não existe</p>';
+			}
+            if(!$cooperativa->responsavel){
+                $dados['formerror'] .= '<p>Esta cooperativa não possui um responsável</p>';
+                
+            }
+		 }
 		$this->form_validation->set_rules('caracteristicasCoop',  		  'caracteristicasCoop',   		'trim');
 		$this->form_validation->set_rules('entidadeExecutora',     'Entidade Executora',      'trim|required|is_natural');
 		$this->form_validation->set_rules('dataEncerramento',     'Data Encerramento',      'trim|required');
@@ -200,7 +225,7 @@ class Projetopnae extends MY_Controller {
 			$dados['entidadesExecutoras'] = $this->Entidade_model->listar();
 		}else{
             
-			$pathToSave = $_SERVER["DOCUMENT_ROOT"] . "/sistema-2019/SYSCOOP/application/arquivoEdital/";
+			$pathToSave = $_SERVER["DOCUMENT_ROOT"] . "/application/arquivoEdital/";
 
 			/*Checa se a pasta existe - caso negativo ele cria*/
 			if(!file_exists($pathToSave))
@@ -216,7 +241,7 @@ class Projetopnae extends MY_Controller {
 					$dir = $pathToSave; 
 					$tmpName = $_FILES['arquivoEdital']['tmp_name'];
 					$name = $_FILES['arquivoEdital']['name'];
-					$pdf_path = "/sistema-2019/SYSCOOP/application/arquivoEdital/".$_FILES['arquivoEdital']['name'];
+					$pdf_path = "/application/arquivoEdital/".$_FILES['arquivoEdital']['name'];
 
 					preg_match_all('/\.[a-zA-Z0-9]+/', $name , $extensao);
 					if(!in_array(strtolower(current(end($extensao))), array('.txt','.pdf', '.doc', '.xls','.xlms')))
@@ -231,15 +256,7 @@ class Projetopnae extends MY_Controller {
 
 			}
             
-			$cooperativa = $this->Cooperativa_model->getById(set_value('cooperativa'));
-
-			if(!$cooperativa){
-				$dados['formerror'] .= '<p>Esta cooperativa não existe</p>';
-			}
-            if(!$cooperativa->responsavel){
-                $dados['formerror'] .= '<p>Esta cooperativa não possui um responsável</p>';
-                
-            }
+			
 			$entidadeExecutora = $this->Entidade_model->getById(set_value('entidadeExecutora'));
 			if(!$entidadeExecutora){
 				$dados['formerror'] .= '<p>Esta Entidade Executora não existe</p>';

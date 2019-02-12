@@ -110,13 +110,16 @@ function validaCPF(cpf) {
             erro = "Número de CPF inválido.";
     }
     if (erro.length > 0) {
-        alert(erro).click(erro);
+        // alert(erro).click(erro);
+        exibeErro(erro);
         cpf.focus();
         return false;
     }
     return true;
 }
-
+$('#cpf').on('blur', function(){
+    validaCPF(this)
+})
 
 function maskCPF(CPF) {
     var evt = window.event;

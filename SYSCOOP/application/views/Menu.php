@@ -5,17 +5,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="pt-BR">
 
 <head>
-  <base href="<?php echo base_url(); ?>">
-  <meta charset="UTF-8">
-    <title>SYSCOOP</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-  <link rel="shortcut icon" href="assets/icone.png" >
+<title>SYSCOOP</title>
+<base href="<?php echo base_url(); ?>">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE-edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" type="text/css" href="assets/style.css">
+
+<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel="shortcut icon" href="assets/icone.png" >
+<link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
+<body>
   <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
   <div class="container-fluid">
   <a class="text-white navbar-brand" href="<?php echo site_url('projetopnae')?>">Projetos</a>
@@ -75,8 +76,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 </nav>
-
-</head>
+ 
+  <script src="assets/bootstrap/js/jquery.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
 
 
 
