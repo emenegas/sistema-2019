@@ -49,23 +49,40 @@ class Projetopnae extends MY_Controller {
 
 
 	public function novo(){
-         if(($this->session->cooperativa == NULL) || ($this->session->cpf == '03024875069'))
-                {
-                    $dados=[
 
-			         'cooperativas'=> $this->Cooperativa_model->listar(),
-                   	 'entidadesExecutoras' => $this->Entidade_model->listar()
 
-		              ];
-                
-                }else{
+		if(($this->session->cooperativa == NULL) || ($this->session->cpf == '03024875069'))
+		{
+			$dados=[
+
+			 'cooperativas'=> $this->Cooperativa_model->listar(),
+				'entidadesExecutoras' => $this->Entidade_model->listar()
+
+			  ];
+		
+			  exit($this->load->view('Projetopnae', $dados, TRUE));
+		}
+		$cooperativaCentral = $this->Cooperativa_model->getById($this->session->cooperativa);
+
+    	 if($cooperativaCentral->cooperativa != NULL){
+
+			$dados=[
+
+				'cooperativas'=> $this->Cooperativa_model->listar(),
+				   'entidadesExecutoras' => $this->Entidade_model->listar()
+
+				 ];
+
+		 }
+        
+				if($cooperativaCentral->cooperativa == NULL){
 
                     $dados=[
 
 			         'cooperativas'=> $this->Cooperativa_model->getByIdDataList($this->session->cooperativa),
                      'entidadesExecutoras' => $this->Entidade_model->listar()
 
-		              ];
+		            ];
                    
                 }
 		
@@ -187,38 +204,59 @@ class Projetopnae extends MY_Controller {
 
 		$this->form_validation->set_rules('nomeEdital', 		'Nome Edital',         'trim|required');
 		$this->form_validation->set_rules('arquivoEdital', 		'Arquivo Edital',         'trim');
-
-		$cooperativaCentral = $this->Cooperativa_model->getById($this->session->cooperativa);
-    	 if($cooperativaCentral->cooperativa == 'bunda'){
-			$this->form_validation->set_rules('cooperativa',    	 'Cooperativa',           'trim|required|is_natural');
-			$cooperativa = $this->Cooperativa_model->getById(set_value('cooperativa'));
-
-			if(!$cooperativa){
-				$dados['formerror'] .= '<p>Esta cooperativa não existe</p>';
-			}
-            if(!$cooperativa->responsavel){
-                $dados['formerror'] .= '<p>Esta cooperativa não possui um responsável</p>';
-                
-            }
-		 }
-		 else{
-			
-			$cooperativa = $this->Cooperativa_model->getById($this->session->cooperativa);
-
-			if(!$cooperativa){
-				$dados['formerror'] .= '<p>Esta cooperativa não existe</p>';
-			}
-            if(!$cooperativa->responsavel){
-                $dados['formerror'] .= '<p>Esta cooperativa não possui um responsável</p>';
-                
-            }
-		 }
 		$this->form_validation->set_rules('caracteristicasCoop',  		  'caracteristicasCoop',   		'trim');
+		$this->form_validation->set_rules('cooperativa',    	 'Cooperativa',           'trim|is_natural');
 		$this->form_validation->set_rules('entidadeExecutora',     'Entidade Executora',      'trim|required|is_natural');
 		$this->form_validation->set_rules('dataEncerramento',     'Data Encerramento',      'trim|required');
-
-
+	
 		$dados = ['formerror' => ''];
+		if($this->session->cooperativa == NULL || $this->session->cpf == '03024875069'){
+				
+			$this->form_validation->set_rules('cooperativa',    	 'Cooperativa',           'trim|required|is_natural');
+
+			$cooperativa = $this->Cooperativa_model->getById($this->input->post('cooperativa'));
+
+			if(!$cooperativa){
+				$dados['formerror'] .= '<p>Esta cooperativa não existe</p>';
+			}
+				if(!$cooperativa->responsavel){
+				$dados['formerror'] .= '<p>Esta cooperativa não possui um responsável</p>';
+				
+			}
+
+		}else{
+		$cooperativaCentral = $this->Cooperativa_model->getById($this->session->cooperativa);
+
+		if($cooperativaCentral->cooperativa == NULL){
+			
+			$cooperativa = $this->Cooperativa_model->getById($this->session->cooperativa);	
+
+			if(!$cooperativa){
+				$dados['formerror'] .= '<p>Esta cooperativa não existe</p>';
+			}
+				if(!$cooperativa->responsavel){
+				$dados['formerror'] .= '<p>Esta cooperativa não possui um responsável</p>';
+				
+			}	
+
+		 }else{
+
+			$this->form_validation->set_rules('cooperativa',    	 'Cooperativa',           'trim|required|is_natural');
+
+			$cooperativa = $this->Cooperativa_model->getById($this->input->post('cooperativa'));
+			
+			if(!$cooperativa){
+				$dados['formerror'] .= '<p>Esta cooperativa não existe</p>';
+			}
+				if(!$cooperativa->responsavel){
+				$dados['formerror'] .= '<p>Esta cooperativa não possui um responsável</p>';
+				
+			}
+
+		 }
+		}
+//---------------------------FORM VALIDATION-------------------------------------------------------
+		
 		if($this->form_validation->run()== FALSE){
 			$dados['formerror'] .= validation_errors();
 			$dados['cooperativas'] = $this->Cooperativa_model->listar();
@@ -256,7 +294,7 @@ class Projetopnae extends MY_Controller {
 
 			}
             
-			
+	
 			$entidadeExecutora = $this->Entidade_model->getById(set_value('entidadeExecutora'));
 			if(!$entidadeExecutora){
 				$dados['formerror'] .= '<p>Esta Entidade Executora não existe</p>';

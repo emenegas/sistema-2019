@@ -25,6 +25,10 @@ class Cooperativa_model extends CI_Model {
 			$data['dapNumero'] = $this->input->post('dapNumero');
 			$data['dapValidade'] = $this->input->post('dapValidade');
 			
+			$this->load->model('Logs_model');
+			$acao = 'cadastrou cooperativa';
+			$this->Logs_model->inserir($acao);
+			print_r()
 			return $this->db->insert('cooperativas',$data);
 
 		}catch(Exception $e){

@@ -9,6 +9,8 @@ class Funcionario extends MY_Controller {
 		$this->load->library('curl');
 		$this->load->model('Cooperativa_model');
 		$this->load->model('Funcionario_model');
+		
+		
 	}
 
 //---------------------------------------------------------------------------------

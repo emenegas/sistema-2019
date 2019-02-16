@@ -154,3 +154,6 @@ function retiraFormatacao(CPF) {
         value = value.replace("/", "");
     }
 }
+setTimeout(function(){
+    $('button.close').click()
+  },5000);

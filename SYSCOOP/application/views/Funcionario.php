@@ -17,7 +17,7 @@ include'Menu.php';
 				</div>
 				<div class="col-md-4 mb-3">
 					<label form="cpf">CPF</label>
-					<input type="tel" class="form-control" name="cpf" id="cpf" placeholder="000.000.000-00" maxlength="11">
+					<input type="tel" class="form-control" name="cpf" id="cpf" placeholder="000.000.000-00" maxlength="11" required>
 					<div class="invalid-feedback">
 						Campo obrigatório! Digite um CPF válido! Obs: Não é permitida a duplicidade desta informação!
 					</div>
@@ -43,8 +43,8 @@ include'Menu.php';
 						Campo obrigatório! Digite a senha para posteriormente o funcionário poder acessar o sistema!
 					</div>
 				</div>
-            </div>
-			<div class="row border border-primary">
+            
+			
 				<div class="col-md-4 mb-3">
 					<label form="cep">CEP</label>
 					<input type="text" name="cep" id="cep" class="form-control" placeholder="00000-000" value="<?php echo set_value('cep')?>" required>
@@ -87,10 +87,10 @@ include'Menu.php';
 					<label form="numero">Numero</label>
 					<input type="text" name="numero" id="numero" class="form-control" placeholder="Ex. 0000" value="<?php echo set_value('numero')?>" >
 				     <div class="invalid-feedback">
-						Campo obrigatório! Se não houver número, marque a opção S/N
+						Se não houver numero deixe o campo em branco.
 					</div>
                 </div>
-             </div>
+            </div>
 			
 				<div class="button" style="margin-top: 30px;float: right;">
 					<button type="submit" class="btn btn-outline-info">Cadastrar</button>

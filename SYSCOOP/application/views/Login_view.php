@@ -9,8 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <title>SYSCOOP</title>
   <base href="<?php echo base_url(); ?>">
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="assets/icone.png" >
   <link rel="stylesheet" type="text/css" href="assets/styleLogin.css">
 </head>
@@ -40,7 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-user"></i></span>
             </div>
-            <input type="text" id="cpf" name="cpf" class="form-control" placeholder="CPF*" onKeyPress="return Apenas_Numeros(event);" onBlur="validaCPF(this);" required>
+            <input type="tel" id="cpf" name="cpf" class="form-control" placeholder="CPF*" required>
 
           </div>
           <div class="input-group form-group">
@@ -59,18 +58,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
   </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+<script src="assets/bootstrap/js/jquery.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/cpf.js" type="text/javascript"></script>
 <script src="assets/endereco.js" type="text/javascript"></script>
 <script src="assets/hasValidate.js" type="text/javascript"></script>
-<script type="text/javascript">
-  setTimeout(function(){
-    $('button.close').click()
-  },5000);
-</script>
 
 </body>
 

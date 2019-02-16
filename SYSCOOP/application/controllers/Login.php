@@ -44,7 +44,7 @@ class Login extends CI_Controller {
                     
                     if($cooperativaCentral->cooperativa == NULL)
                     {
-                        redirect('funcionario');
+                        redirect('projetopnae');
                     }else{
                         redirect('projetopnae');
                     }    

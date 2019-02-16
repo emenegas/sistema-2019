@@ -16,14 +16,14 @@ include'Menu.php';
 				</div>
 				<div class="col-md-4 mb-3">
 					<label for="cpf">CPF</label>
-					<input type="text" class="form-control" name="cpf" id="cpf" placeholder="000.000.000-00" onKeyPress="return Apenas_Numeros(event);" onBlur="validaCPF(this);" maxlength="11">
+					<input type="tel" class="form-control" name="cpf" id="cpf" placeholder="000.000.000-00" maxlength="11" required>
 					<div class="invalid-feedback">
 						Campo obrigatório! Digite o numero do seu CPF sem pontos e traços.
 					</div>
 				</div>
 				<div class="col-md-4 mb-3">
 					<label for="telefone">Telefone</label>
-					<input type="text" class="form-control" name="telefone" id="telefone" placeholder="(00)000000000" value="<?php echo set_value('telefone')?>" required>
+					<input type="text" class="form-control" name="telefone" id="telefone" value="<?php echo set_value('telefone')?>" required>
 					<div class="invalid-feedback">
 						Campo obrigatório! Digite o seu telefone com DDD.
 					</div>
@@ -36,33 +36,49 @@ include'Menu.php';
 					</div>
 				</div>
 				<div class="col-md-4 mb-3">
-					<label for="cep">CEP</label>
-					<input type="text" class="form-control" name="cep" id="cep" placeholder="00000-000" value="<?php echo set_value('cep')?>" required>
+					<label form="cep">CEP</label>
+					<input type="text" name="cep" id="cep" class="form-control" placeholder="00000-000" value="<?php echo set_value('cep')?>" required>
 					<div class="invalid-feedback">
-						Campo obrigatório! Digite o CEP da sua residência com 8 digitos!
+						Campo obrigatório! Digite um CEP com 8 digitos!
 					</div>
 				</div>
 				<div class="col-md-4 mb-3">
-					<label for="uf">UF</label>
-					<input type="text" class="form-control" name="uf" id="uf" placeholder="Estado" value="<?php echo set_value('uf')?>" required>
+					<label form="uf">Estado</label>
+					<input type="text" name="uf" id="uf" class="form-control" value="<?php echo set_value('uf')?>" required>
 					<div class="invalid-feedback">
-						Campo obrigatório! Digite aqui o Estado!
+						Campo obrigatório!
 					</div>
 				</div>
 				<div class="col-md-4 mb-3">
-					<label for="cidade">Cidade</label>
-					<input type="text" class="form-control" name="cidade" id="cidade" placeholder="Cidade" value="<?php echo set_value('cidade')?>" required>
+					<label form="cidade">Cidade</label>
+					<input type="text" name="cidade" id="cidade" class="form-control" value="<?php echo set_value('cidade')?>" required>
 					<div class="invalid-feedback">
-						Campo obrigatório! Digite a sua cidade de moradia!
+						Campo obrigatório!
 					</div>
 				</div>
+				
+				<div class="col-md-2 mb-3">
+					<label form="bairro">Bairro</label>
+					<input type="text" name="bairro" id="bairro" class="form-control" value="<?php echo set_value('bairro')?>" required>
+					<div class="invalid-feedback">
+						Campo obrigatório!
+					</div>
+				</div>
+
 				<div class="col-md-4 mb-3">
-					<label for="endereco">Endereço</label>
-					<input type="text" class="form-control" name="endereco" id="endereco" placeholder="Rua - 000, centro" value="<?php echo set_value('endereco')?>" required>
+					<label form="endereco">Endereço</label>
+					<input type="text" name="endereco" id="endereco" class="form-control" placeholder="Rua exemplo" value="<?php echo set_value('endereco')?>" required>
 					<div class="invalid-feedback">
-						Campo obrigatório! Exemplo: Rua exemplo-142, centro!
+						Campo obrigatório!
 					</div>
 				</div>
+               <div class="col-md-2 mb-3">
+					<label form="numero">Numero</label>
+					<input type="text" name="numero" id="numero" class="form-control" placeholder="Ex. 0000" value="<?php echo set_value('numero')?>" >
+				     <div class="invalid-feedback">
+						Se não houver numero deixe o campo em branco.
+					</div>
+                </div>
 				<div class="col-md-4 mb-3">
 					<label for="dapNumero">Numero da DAP</label>
 					<input type="text" class="form-control" name="dapNumero" id="dapNumero" placeholder="Numero" value="<?php echo set_value('dapNumero')?>" required>

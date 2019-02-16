@@ -60,19 +60,31 @@ class Agricultor_model extends CI_Model {
 	public function listar(){
 
 		try{
-
 			$status = $this->input->get('status') == 'inativo'? 'inativo': 'ativo';
-			return $this->db
-			->where('status',$status)
-			->get('agricultores')->result();
 
+			$agriCops = $this->db
+			->where('cooperativa', $this->session->cooperativa)
+			->get('agricultores_has_cooperativas')->result();
+			
+			
+			foreach((array)$agriCops as $agriCop){
+				$dados = [];
+				$dados['agricultor'] = $agriCop;
+				
+				 return $this->db
+				->where('id', $dados['agricultor']->agricultor)
+				->where('status',$status)
+				->get('agricultores')->result();
+			}
+			
 		}catch(Exception $e){
 			return FALSE;
 		}
 	}
 
 	//----------------------------------------------------------------------------------
-	
+
+
 	public function getById($id){
 
 		try{
