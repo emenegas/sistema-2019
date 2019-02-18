@@ -11,6 +11,7 @@ include'Menu.php';
     </button>
   </div>
   <?php endif; ?>
+  <?php if($cooperativas != 0){ ?>
 <div class="container-fluid">
    <div id='table'>
       <table class= 'table table-hover'>
@@ -51,7 +52,7 @@ include'Menu.php';
 
    </div>
 </div>
-
+  <?php } ?>
 <script type="text/javascript">
   setTimeout(function(){
     $('button.close').click()

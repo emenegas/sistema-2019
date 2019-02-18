@@ -30,9 +30,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <li class="nav-item">
         <a class="text-white nav-link" href="<?php echo site_url('entidade')?>">Entidades Executoras</a>
       </li>
+      <?php if($this->session->cooperativa == NULL){ ?>
       <li class="nav-item">
         <a class="text-white nav-link" href="<?php echo site_url('Cooperativa')?>">Cooperativas</a>
       </li>
+      <?php } ?>
       <li class="nav-item">
         <a class="text-white nav-link" href="<?php echo site_url('Produto')?>">Produtos</a>
       </li>

@@ -11,6 +11,8 @@ class Projetopnae_model extends CI_Model {
 			$this->load->model('Cooperativa_model');
 			$this->load->model('itens_model');
 			$this->load->model('Funcionario_model');
+			$this->load->model('Logs_model');
+
 
 			$funcionario = $this->Funcionario_model->getById($cooperativa->responsavel);
 
@@ -56,6 +58,8 @@ class Projetopnae_model extends CI_Model {
 			$data['dataEncerramento'] = $this->input->post('dataEncerramento');
 
 			$this->db->insert('projetos',$data);
+			$acao = 'Cadastro de um novo projeto PNAE';
+			$this->Logs_model->inserir($acao);
 			return $this->db->insert_id();
 
 		}catch(Exception $e){
@@ -106,6 +110,9 @@ class Projetopnae_model extends CI_Model {
 			$this->db
 			->where('id', $id)
 			->delete('projetos');
+
+			$acao = 'Remoção de Projeto PNAE';
+			$this->Logs_model->inserir($ação);
 			
 		}catch(Exception $e){
 			return false;
@@ -121,6 +128,9 @@ class Projetopnae_model extends CI_Model {
 			$this->db->where('id', $id);
 			$this->db->set($data);
 			return $this->db->update('projetos');
+
+			$acao = 'Alteração de Projeto PNAE';
+			$this->Logs_model->inserir($acao);
 			
 		}catch(Exception $e){
 			return FALSE;

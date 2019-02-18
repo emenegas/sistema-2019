@@ -22,13 +22,14 @@ class Cooperativa_model extends CI_Model {
 			$data['uf'] = $this->input->post('uf');
 			$data['cidade'] = $this->input->post('cidade');
 			$data['endereco'] = $this->input->post('endereco');
+			$data['numero'] = $this->input->post('numero');
 			$data['dapNumero'] = $this->input->post('dapNumero');
 			$data['dapValidade'] = $this->input->post('dapValidade');
 			
 			$this->load->model('Logs_model');
-			$acao = 'cadastrou cooperativa';
+			$acao = 'Cadastro de uma nova Cooperativa';
 			$this->Logs_model->inserir($acao);
-			print_r()
+			
 			return $this->db->insert('cooperativas',$data);
 
 		}catch(Exception $e){
@@ -50,6 +51,7 @@ class Cooperativa_model extends CI_Model {
 		}catch(Exception $e){
 			return FALSE;
 		}
+		
 	}
 
 	//----------------------------------------------------------------------------------
@@ -96,6 +98,10 @@ class Cooperativa_model extends CI_Model {
 			$this->db->where('id', $id);
 			$this->db->set($data);
 			return $this->db->update('cooperativas');
+
+			$this->load->model('Logs_model');
+			$acao = 'Alteração na Cooperativa';
+			$this->Logs_model->inserir($acao);
 
 		}catch(Exception $e){
 			return FALSE;

@@ -285,7 +285,7 @@ class Agricultor extends MY_Controller {
 
 		else:
 
-			$this->Agricultor_model->cadastrar();
+			$this->Agricultor_model->cadastrar($cooperativa);
 			redirect('agricultor');
 
 		endif;

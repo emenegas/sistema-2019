@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Agricultor_model extends CI_Model {
 
 	
-	public function cadastrar()
+	public function cadastrar($cooperativa)
 	{	
 		try{
 
@@ -17,35 +17,31 @@ class Agricultor_model extends CI_Model {
 			$data['cep'] = $this->input->post('cep');
 			$data['cidade'] = $this->input->post('cidade');
 			$data['endereco'] = $this->input->post('endereco');
+			$data['numero'] = $this->input->post('numero');
 			$data['dapNumero'] = $this->input->post('dapNumero');
 			$data['dapValidade'] = $this->input->post('dapValidade');
 
-
 			$this->db->insert('agricultores',$data);
-			
-		}catch(Exception $e){
-			return false;
-		}
+			$agricultorId = $this->db->insert_id();
 
-		$agricultorId = $this->db->insert_id();
-		
-		try{
-			foreach ($this->input->post('produtos') as $produtoId) {
+			$this->load->model('Logs_model');
+			$acao = 'Cadastro de um novo agricultor';
+			$this->Logs_model->inserir($acao);
 
-				$data = [];
-				$data['produto'] = $produtoId;
-				$data['agricultor'] = $agricultorId;
-				$this->db->insert('agricultores_has_produtos', $data);
-			}			
-		}catch(Exception $e){
-			return false;
-		}
-		try{
-			
-			if($this->input->post('cooperativa')) {
+			if(!empty($this->input->post('produtos'))){
+
+				foreach ($this->input->post('produtos') as $produtoId) {
+
+					$data = [];
+					$data['produto'] = $produtoId;
+					$data['agricultor'] = $agricultorId;
+					$this->db->insert('agricultores_has_produtos', $data);
+				}	
+			}		
+			if(!empty($cooperativa)) {
 
 				$data = [];
-				$data['cooperativa'] = $this->input->post('cooperativa');
+				$data['cooperativa'] = $cooperativa->id;
 				$data['agricultor'] = $agricultorId;
 				$this->db->insert('agricultores_has_cooperativas', $data);
 			}	
@@ -60,28 +56,18 @@ class Agricultor_model extends CI_Model {
 	public function listar(){
 
 		try{
-			$status = $this->input->get('status') == 'inativo'? 'inativo': 'ativo';
-
-			$agriCops = $this->db
-			->where('cooperativa', $this->session->cooperativa)
-			->get('agricultores_has_cooperativas')->result();
-			
-			if(empty($agriCops)){
-				
-				return FALSE;
-		
-			}else{
-			
-			foreach((array)$agriCops as $agriCop){
-				$dados = [];
-				$dados['agricultor'] = $agriCop;
-				
-				 return $this->db
-				->where('id', $dados['agricultor']->agricultor)
-				->where('status',$status)
-				->get('agricultores')->result();
+			$status = $this->input->get('status') == 'inativo' ? 'inativo' : 'ativo';
+	
+			if ( !empty($this->session->cooperativa) )
+			{
+				$this->db
+					->join('agricultores_has_cooperativas', 'id=agricultor')
+					->where('cooperativa', $this->session->cooperativa);
 			}
-		}
+	
+			return $this->db
+				->where('status', $status)
+				->get('agricultores')->result();
 		}catch(Exception $e){
 			return FALSE;
 		}
@@ -164,6 +150,11 @@ class Agricultor_model extends CI_Model {
 				$this->db->set($dados);
 				$this->db->replace('agricultores_has_cooperativas');
 			}
+
+			$this->load->model('Logs_model');
+			$acao = 'Alteração no Agricultor';
+			$this->Logs_model->inserir($acao);
+
 			return TRUE;		
 
 		}catch(Exception $e){

@@ -25,12 +25,28 @@ class Cooperativa extends MY_Controller {
 	//----------------------------------------------------------------------------------
 
 	public function index(){
+		if(!empty($this->session->cooperativa))
+		{
 
-		$dados=[
-			
-			'cooperativas' => $this->Cooperativa_model->listar()
-		];
-		$this->load->view('CooperativasLista', $dados);
+			$cooperativaCentral = $this->Cooperativa_model->getById($this->session->cooperativa);
+
+			if($cooperativaCentral->cooperativa != NULL){
+
+		  	 $data=[
+					'cooperativas'=> $this->Cooperativa_model->listar()
+				];
+			}else{
+				$data=[
+					'cooperativas'=> 0
+				];
+			}	
+		}else{
+			$data=[
+				'cooperativas' => $this->Cooperativa_model->listar()
+			];
+		}
+	
+		$this->load->view('CooperativasLista', $data);
 	}
 
 	//----------------------------------------------------------------------------------

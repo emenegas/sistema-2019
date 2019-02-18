@@ -18,8 +18,13 @@ class Entidade_model extends CI_Model {
 			$data['uf'] = $this->input->post('uf');
 			$data['cidade'] = $this->input->post('cidade');
 			$data['endereco'] = $this->input->post('endereco');
+			$data['numero'] = $this->input->post('numero');
 
 			return $this->db->insert('entidadesexecutoras',$data);
+
+			$this->load->model('Logs_model');
+			$acao = 'Cadastro de uma nova Entidade Executora';
+			$this->Logs_model->inserir($acao);
 
 		}catch(Exception $e){
 			return FALSE;
@@ -70,6 +75,9 @@ class Entidade_model extends CI_Model {
 			$this->db->set($data);
 			return $this->db->update('entidadesexecutoras');
 
+			$this->load->model('Logs_model');
+			$acao = 'Alteração da Entidade Executora';
+			$this->Logs_model->inserir($acao);
 		}catch(Exception $e){
 			return FALSE;
 		}
