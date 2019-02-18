@@ -66,6 +66,11 @@ class Agricultor_model extends CI_Model {
 			->where('cooperativa', $this->session->cooperativa)
 			->get('agricultores_has_cooperativas')->result();
 			
+			if(empty($agriCops)){
+				
+				return FALSE;
+		
+			}else{
 			
 			foreach((array)$agriCops as $agriCop){
 				$dados = [];
@@ -76,7 +81,7 @@ class Agricultor_model extends CI_Model {
 				->where('status',$status)
 				->get('agricultores')->result();
 			}
-			
+		}
 		}catch(Exception $e){
 			return FALSE;
 		}

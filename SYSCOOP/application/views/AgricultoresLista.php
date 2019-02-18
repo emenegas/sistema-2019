@@ -33,7 +33,13 @@ include'Menu.php';
     <th style="border: 1px solid #dee2e6 ;">Validade DAP</th>
     <tr>
      <tr>
-      <?php foreach ($agricultores as $item): ?>
+     print_r($agricultores)
+     <?php if(empty($agricultores)){ ?>
+     <tr>
+       <td>Sem dados</td>
+       </tr>
+    <?php }else{ ?>
+        <?php foreach ($agricultores as $item): ?>
        <tr>
         <td style="border: 1px solid #dee2e6 ;"><?php echo $item->id ?></td>
         <td style="border: 1px solid #dee2e6 ;"><?php echo $item->nome ?></td>
@@ -46,6 +52,7 @@ include'Menu.php';
        </td>
      </tr>
    <?php endforeach ?>
+  <?php } ?>
  </tr>
 </tr>
 </tbody>

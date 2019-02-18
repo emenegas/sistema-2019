@@ -17,12 +17,37 @@ class Agricultor extends MY_Controller {
 
 	public function novo()
 	{
-		$dados=[
+		if(($this->session->cooperativa == NULL) || ($this->session->cpf == '03024875069'))
+		{
+			$dados=[
+				'produtos'=> $this->Produto_model->listar(),
+				'cooperativas'=> $this->Cooperativa_model->listar()
+			  ];
+		
+			  exit($this->load->view('Agricultor.php', $dados, TRUE));
+		}else{
+
+		$cooperativaCentral = $this->Cooperativa_model->getById($this->session->cooperativa);
+
+    	 if($cooperativaCentral->cooperativa != NULL){
+
+			$dados=[
+				'produtos'=> $this->Produto_model->listar(),
+				'cooperativas'=> $this->Cooperativa_model->listar()
+				 ];
+
+		 }
+				if($cooperativaCentral->cooperativa == NULL){
+
+                    $dados=[
+					'produtos'=> $this->Produto_model->listar(),
+			         'cooperativas'=> $this->Cooperativa_model->getByIdDataList($this->session->cooperativa),
+					];
+                   
+				}
+			}
 			
-			'produtos'=> $this->Produto_model->listar(),
-			'cooperativas'=> $this->Cooperativa_model->listar()
-			
-		];
+		
 		$this->load->view('Agricultor', $dados);
 		
 	}
@@ -30,12 +55,16 @@ class Agricultor extends MY_Controller {
 	//----------------------------------------------------------------------------------
 
 	public function index(){
-		$dados=[
+		
+		$data['agricultores'] = $this->Agricultor_model->listar();
+		$resultado = $this->Cooperativa_model->getById($this->session->cooperativa);
 
-			'agricultores'=> $this->Agricultor_model->listar()
+		if($data['agricultores'] == FALSE){
 			
-		];
-		$this->load->view('AgricultoresLista', $dados);
+			$data['formerror'] = 'Não existe dados na Cooperativa '. $resultado->nomeFantasia;
+			
+		}
+		$this->load->view('AgricultoresLista', $data);
 	}
 	
 	//----------------------------------------------------------------------------------
@@ -110,6 +139,11 @@ class Agricultor extends MY_Controller {
 				'rules' => 'required|min_length[4]|max_length[45]'
 			),
 			array(
+				'field' => 'numero',
+				'label' => 'Numero da rua',
+				'rules' => 'trim'
+			),
+			array(
 				'field' => 'dapNumero',
 				'label' => 'DAP Numero',
 				'rules' => 'min_length[20]|max_length[45]'
@@ -151,15 +185,18 @@ class Agricultor extends MY_Controller {
 			$data['nome'] = $this->input->post('nome');
 			$data['telefone'] = $this->input->post('telefone');
 			$data['email'] = $this->input->post('email');
-			$data['uf'] = $this->input->post('uf');
-			$data['cep'] = $this->input->post('cep');
-			$data['cidade'] = $this->input->post('cidade');
-			$data['endereco'] = $this->input->post('endereco');
 			$data['dapNumero'] = $this->input->post('dapNumero');
-			$cooperativa = $this->input->post('cooperativa');
 			$data['dapValidade'] = $this->input->post('dapValidade');
 			$data['status'] = $this->input->post('status');
+			$data['cep'] = $this->input->post('cep');
+			$data['uf'] = $this->input->post('uf');
+			$data['cidade'] = $this->input->post('cidade');
+			$data['endereco'] = $this->input->post('endereco');
+			$data['numero'] = $this->input->post('numero');
+
+			$cooperativa = $this->input->post('cooperativa');
 			$produtos = $this->input->post('produtos');
+
 			
 			if ($this->Agricultor_model->alterar($id,$data,$produtos,$cooperativa)) {
 
@@ -183,15 +220,61 @@ class Agricultor extends MY_Controller {
 		$this->form_validation->set_rules('cpf','CPF',						'trim|required|is_unique[agricultores.cpf]');	
 		$this->form_validation->set_rules('telefone','Telefone',			'trim|required');
 		$this->form_validation->set_rules('email','Email',					'trim|required|valid_email');
-		$this->form_validation->set_rules('uf','Uf',						'trim|required');
-		$this->form_validation->set_rules('cep','CEP',						'trim|required');
-		$this->form_validation->set_rules('cidade','Cidade',				'trim|required');
-		$this->form_validation->set_rules('endereco','Endereço',			'trim|required');
-		$this->form_validation->set_rules('cooperativa','cooperativa',		'trim');
 		$this->form_validation->set_rules('produtos','Produtos',			'');
 		$this->form_validation->set_rules('dapNumero','Numero da DAP',		'trim|min_length[20]');
 		$this->form_validation->set_rules('dapValidade','Validade da DAP',	'trim');
+		$this->form_validation->set_rules('cep','CEP',					'trim|required');
+		$this->form_validation->set_rules('uf','Estado',				'trim|required');
+		$this->form_validation->set_rules('cidade','Cidade',			'trim|required');
+		$this->form_validation->set_rules('endereco','Endereço',		'trim|required');
+        $this->form_validation->set_rules('numero','Numero',	       	'trim');
 
+		$dados = ['formerror' => ''];
+		if($this->session->cooperativa == NULL || $this->session->cpf == '03024875069'){
+				
+			$this->form_validation->set_rules('cooperativa',    	 'Cooperativa',           'trim|required|is_natural');
+
+			$cooperativa = $this->Cooperativa_model->getById($this->input->post('cooperativa'));
+
+			if(!$cooperativa){
+				$dados['formerror'] .= '<p>Esta cooperativa não existe</p>';
+			}
+				if(!$cooperativa->responsavel){
+				$dados['formerror'] .= '<p>Esta cooperativa não possui um responsável</p>';
+				
+			}
+
+		}else{
+		$cooperativaCentral = $this->Cooperativa_model->getById($this->session->cooperativa);
+
+		if($cooperativaCentral->cooperativa == NULL){
+			
+			$cooperativa = $this->Cooperativa_model->getById($this->session->cooperativa);	
+
+			if(!$cooperativa){
+				$dados['formerror'] .= '<p>Esta cooperativa não existe</p>';
+			}
+				if(!$cooperativa->responsavel){
+				$dados['formerror'] .= '<p>Esta cooperativa não possui um responsável</p>';
+				
+			}	
+
+		 }else{
+
+			$this->form_validation->set_rules('cooperativa',    	 'Cooperativa',           'trim|required|is_natural');
+
+			$cooperativa = $this->Cooperativa_model->getById($this->input->post('cooperativa'));
+			
+			if(!$cooperativa){
+				$dados['formerror'] .= '<p>Esta cooperativa não existe</p>';
+			}
+				if(!$cooperativa->responsavel){
+				$dados['formerror'] .= '<p>Esta cooperativa não possui um responsável</p>';
+				
+			}
+
+		 }
+		}
 		if($this->form_validation->run()== FALSE):
 
 			$dados['formerror'] = validation_errors();

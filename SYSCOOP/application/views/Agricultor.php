@@ -90,16 +90,20 @@ include'Menu.php';
 					<label for="dapValidade">Validade da DAP</label>
 					<input type="date" class="form-control" name="dapValidade" id="dapValidade" required>
 				</div>
-				<div class="col-md-8 mb-3">
-					<label for="cooperativa">Cooperativa</label>
-					<select name="cooperativa" class="custom-select custom-select mb-3">
-						<option value=""></option>
-						<?php foreach ($cooperativas as $cooperativa)
-						{
-							echo'<option value="' . $cooperativa->id . '">' . $cooperativa->nomeFantasia . '</option>';
-						}?>
-					</select>
-				</div>
+				<?php if(count($cooperativas) > 1): ?>
+                <div class="col-md-6 mb-3">
+                    <label for="cooperativa">Cooperativa:</label>
+                    <input list="cooperativa" name="cooperativa" class="form-control" data-toggle="tooltip" title="Selecione a Cooperativa Fornecedora para este Projeto!" required>
+                    <datalist id="cooperativa">
+                    
+                        <?php foreach ($cooperativas as $cooperativa): ?>
+                        <option value="<?php echo $cooperativa->id ?>">
+                            <?php echo $cooperativa->nomeFantasia ?>
+                        </option>
+                        <?php endforeach ?>
+                    </datalist>
+                </div>
+                <?php endif ?>
 
 				<div class="form-check form-check-inline">
 					<label for="produtos">Produtos:  </label>

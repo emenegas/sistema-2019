@@ -162,9 +162,8 @@ class Funcionario extends MY_Controller {
 		$this->form_validation->set_rules('uf','Estado',				'trim|required');
 		$this->form_validation->set_rules('cidade','Cidade',			'trim|required');
 		$this->form_validation->set_rules('endereco','Endereço',		'trim|required');
-        if($this->input->post('s/n')==FALSE){
-            $this->form_validation->set_rules('numero','Numero',	       	'trim|required');
-        }
+        $this->form_validation->set_rules('numero','Numero',	       	'trim');
+        
         
 
 

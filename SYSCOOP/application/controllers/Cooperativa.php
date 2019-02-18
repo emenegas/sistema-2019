@@ -201,10 +201,11 @@ class Cooperativa extends MY_Controller {
 		$this->form_validation->set_rules('banco',  		  'banco',   				'trim');
 		$this->form_validation->set_rules('agencia',  		  'agencia',   				'trim');
 		$this->form_validation->set_rules('numeroContaCorrente',   'numeroContaCorrente',		'trim');
-		$this->form_validation->set_rules('endereco',     'Endereço',      		'trim|required');
-		$this->form_validation->set_rules('uf',  		  'UF',   				'trim|required');
-		$this->form_validation->set_rules('cidade',  		  'cidade',   		'trim|required');
-		$this->form_validation->set_rules('cep',  		  'cep',   				'trim|required');
+		$this->form_validation->set_rules('cep','CEP',					'trim|required');
+		$this->form_validation->set_rules('uf','Estado',				'trim|required');
+		$this->form_validation->set_rules('cidade','Cidade',			'trim|required');
+		$this->form_validation->set_rules('endereco','Endereço',		'trim|required');
+        $this->form_validation->set_rules('numero','Numero',	       	'trim');
 
 
 		if($this->form_validation->run()== FALSE){

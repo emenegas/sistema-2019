@@ -146,10 +146,11 @@ class Entidade extends MY_Controller {
 		$this->form_validation->set_rules('telefone',     'Telefone',      'trim|required');
 		$this->form_validation->set_rules('representante','representante', 'trim|required');
 		$this->form_validation->set_rules('cpfRepresentante',          'CPF Representante',           'trim|required|is_unique[entidadesexecutoras.cpfRepresentante]');
-		$this->form_validation->set_rules('cep',          'cep',           'trim|required');
-		$this->form_validation->set_rules('uf',           'UF',            'trim|required');
-		$this->form_validation->set_rules('cidade',          'cidade',           'trim|required');
-		$this->form_validation->set_rules('endereco',     'Endereço',      'trim|required');
+		$this->form_validation->set_rules('cep','CEP',					'trim|required');
+		$this->form_validation->set_rules('uf','Estado',				'trim|required');
+		$this->form_validation->set_rules('cidade','Cidade',			'trim|required');
+		$this->form_validation->set_rules('endereco','Endereço',		'trim|required');
+        $this->form_validation->set_rules('numero','Numero',	       	'trim');
 		
 		if($this->form_validation->run()== FALSE){
 

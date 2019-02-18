@@ -29,13 +29,53 @@ include'Menu.php';
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="form-row">
-				<div class="col-md-3 mb-3">
+			
+				<div class="col-md-2 mb-3">
 					<label for="telefone">Telefone</label>
 					<input type="text" class="form-control" id="telefone" name="telefone" placeholder="00 000 000000" value="<?php echo $agricultor->telefone; ?>" required>
 					<div class="invalid-feedback">
 						Digite o numero do telefone!
+					</div>
+				</div>
+				
+				<div class="col-md-2 mb-3">
+					<label for="status">Status</label>
+					<select name="status" class="form-control">
+						<option <?php echo $agricultor->status == 'ativo'?'selected':''; ?> value="ativo">Ativo</option>
+						<option <?php echo $agricultor->status == 'inativo'?'selected':''; ?> value="inativo">Inativo</option>
+					</select>
+				</div>
+			
+			<div class="col-md-6 mb-3">
+					<label for="dapNumero">Numero da DAP</label>
+					<input type="text" class="form-control" id="dapNumero" name="dapNumero" value="<?php echo $agricultor->dapNumero; ?>" required>
+					<div class="invalid-feedback">
+						Digite uma DAP válida!
+					</div>
+				</div>
+				<div class="col-md-2 mb-3">
+					<label for="dapValidade">Validade da DAP</label>
+					<input type="date" class="form-control" id="dapValidade" name="dapValidade" value="<?php echo $agricultor->dapValidade; ?>" required>
+				</div>
+				<?php if(count($cooperativas) > 1): ?>
+                <div class="col-md-6 mb-3">
+                    <label for="cooperativa">Cooperativa:</label>
+                    <input list="cooperativa" name="cooperativa" class="form-control" data-toggle="tooltip" title="Selecione a Cooperativa Fornecedora para este Projeto!" required>
+                    <datalist id="cooperativa">
+                    
+                        <?php foreach ($cooperativas as $cooperativa): ?>
+                        <option value="<?php echo $cooperativa->id ?>">
+                            <?php echo $cooperativa->nomeFantasia ?>
+                        </option>
+                        <?php endforeach ?>
+                    </datalist>
+                </div>
+                <?php endif ?>
+				<div class="col-md-3 mb-3">
+					<label for="cep">CEP</label>
+					<input type="text" class="form-control" id="cep" name="cep" placeholder="000.000-00" value="<?php echo $agricultor->cep; ?>" required>
+					<div class="invalid-feedback">
+						Digite um CEP válido!
 					</div>
 				</div>
 				<div class="col-md-3 mb-3">
@@ -45,32 +85,7 @@ include'Menu.php';
 						Digite o nome do Estado!
 					</div>
 				</div>
-				<div class="col-md-3 mb-3">
-					<label for="cep">CEP</label>
-					<input type="text" class="form-control" id="cep" name="cep" placeholder="000.000-00" value="<?php echo $agricultor->cep; ?>" required>
-					<div class="invalid-feedback">
-						Digite um CEP válido!
-					</div>
-				</div>
-				<div class="col-md-3 mb-3">
-					<label for="status">Status</label>
-					<select name="status" class="form-control">
-						<option <?php echo $agricultor->status == 'ativo'?'selected':''; ?> value="ativo">Ativo</option>
-						<option <?php echo $agricultor->status == 'inativo'?'selected':''; ?> value="inativo">Inativo</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="col-md-8 mb-3">
-					<label for="cooperativa">Cooperativa</label>
-					<select name="cooperativa" class="custom-select custom-select mb-3">
-						<option value=""></option>
-						<?php foreach ($cooperativas as $cooperativa)
-						{
-							echo'<option value="' . $cooperativa->id . '">' . $cooperativa->nomeFantasia . '</option>';
-						}?>
-					</select>
-				</div>
+				
 				<div class="col-md-4 mb-3">
 					<label for="cidade">Cidade</label>
 					<input type="text" class="form-control" id="cidade" name="cidade" placeholder="cidade" value="<?php echo $agricultor->cidade; ?>" required>
@@ -85,16 +100,12 @@ include'Menu.php';
 						Digite um endereco válido!
 					</div>
 				</div>
-				<div class="col-md-3 mb-3">
-					<label for="dapNumero">Numero da DAP</label>
-					<input type="text" class="form-control" id="dapNumero" name="dapNumero" value="<?php echo $agricultor->dapNumero; ?>" required>
+				<div class="col-md-1 mb-3">
+					<label for="numero">Numero</label>
+					<input type="text" class="form-control" id="numero" name="numero" value="<?php echo $agricultor->numero; ?>" required>
 					<div class="invalid-feedback">
-						Digite uma DAP válida!
+						Digite um endereco válido!
 					</div>
-				</div>
-				<div class="col-md-2 mb-3">
-					<label for="dapValidade">Validade da DAP</label>
-					<input type="date" class="form-control" id="dapValidade" name="dapValidade" value="<?php echo $agricultor->dapValidade; ?>" required>
 				</div>
 				<div class="form-check form-check-inline">
 					<label for="produtos">Produtos:</label>
